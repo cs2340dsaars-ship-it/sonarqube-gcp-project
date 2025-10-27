@@ -1,5 +1,6 @@
 
 // FILE: ProjectMember.java
+package SOLID_GRASP;
 
 /**
  * A ProjectMember ties a TeamMember to a specific Project

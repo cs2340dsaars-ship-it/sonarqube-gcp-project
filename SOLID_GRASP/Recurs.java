@@ -1,5 +1,6 @@
 
 // FILE: Recurs.java
+package SOLID_GRASP;
 
 /**
  * Interface for anything that can recur.
