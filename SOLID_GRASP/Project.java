@@ -1,4 +1,5 @@
 // FILE: Project.java
+package SOLID_GRASP;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

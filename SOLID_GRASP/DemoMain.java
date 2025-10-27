@@ -1,5 +1,7 @@
 // FILE: DemoMain.java
+package SOLID_GRASP;
 //
+
 // This class is optional. It's here just to prove basic usage and that
 // everything links together. You don't have to submit this if you don't want a main().
 // You can compile all .java files with: javac *.java
@@ -7,8 +9,11 @@
 //
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class DemoMain {
+
+        private static final Logger logger = Logger.getLogger(DemoMain.class.getName());
 
         public static void main(String[] args) {
 
@@ -41,8 +46,8 @@ public class DemoMain {
                 // Recurring task behavior
                 if (t1 instanceof Recurs) {
                         Task next = ((Recurs) t1).generateNextOccurrence();
-                        System.out.println("Next occurrence of '" + t1.getTitle()
-                                        + "' is due " + next.getDueDate());
+                        logger.info(() -> String.format("Next occurrence of '%s' is due %s", t1.getTitle(),
+                                        next.getDueDate()));
                 }
 
                 // Create members
@@ -65,19 +70,17 @@ public class DemoMain {
                 project.addTask(t2);
 
                 // List managers
-                System.out.println("Managers for project " + project.getName() + ":");
+                logger.info(() -> String.format("Managers for project %s:", project.getName()));
                 for (ProjectMember pm : project.getManagers()) {
-                        System.out.println(" - " + pm.getMember().getName()
-                                        + " (" + pm.getMember().getEmail() + ")");
+                        logger.info(() -> String.format(" - %s (%s)", pm.getMember().getName(),
+                                        pm.getMember().getEmail()));
                 }
 
                 // List all tasks
-                System.out.println("Tasks for project " + project.getName() + ":");
+                logger.info(() -> String.format("Tasks for project %s:", project.getName()));
                 for (Task task : project.getTasks()) {
-                        System.out.println(" - " + task.getTitle()
-                                        + " [status=" + task.getStatus()
-                                        + ", priority=" + task.getPriority()
-                                        + "]");
+                        logger.info(() -> String.format(" - %s [status=%s, priority=%s]", task.getTitle(),
+                                        task.getStatus(), task.getPriority()));
                 }
         }
 }

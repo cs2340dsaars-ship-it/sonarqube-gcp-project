@@ -1,5 +1,6 @@
 
 // FILE: RecurringTask.java
+package SOLID_GRASP;
 
 import java.time.LocalDate;
 
@@ -55,9 +56,7 @@ public class RecurringTask extends Task implements Recurs {
      */
     @Override
     public void onUpdate() {
-        // Example future behavior:
-        // syncWithCalendar();
-        // auditLog("Recurring task updated: " + getTitle());
+        // No additional behavior required for recurring tasks on update
     }
 
     public int getRepeatIntervalDays() {
