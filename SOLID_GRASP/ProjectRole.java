@@ -1,6 +1,6 @@
 
 // FILE: ProjectRole.java
-package SOLID_GRASP;
+package solid_grasp;
 
 public enum ProjectRole {
     CONTRIBUTOR,

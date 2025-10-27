@@ -1,6 +1,6 @@
 
 // FILE: Notifier.java
-package SOLID_GRASP;
+package solid_grasp;
 
 /**
  * Abstraction for how the system notifies stakeholders.

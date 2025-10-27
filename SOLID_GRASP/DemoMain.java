@@ -1,5 +1,5 @@
 // FILE: DemoMain.java
-package SOLID_GRASP;
+package solid_grasp;
 //
 
 // This class is optional. It's here just to prove basic usage and that

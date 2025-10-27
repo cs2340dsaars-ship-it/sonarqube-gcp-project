@@ -1,5 +1,5 @@
 // FILE: EmailNotifier.java
-package SOLID_GRASP;
+package solid_grasp;
 
 import java.util.logging.Logger;
 

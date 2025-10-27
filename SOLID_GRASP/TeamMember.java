@@ -1,6 +1,6 @@
 
 // FILE: TeamMember.java
-package SOLID_GRASP;
+package solid_grasp;
 
 import java.util.Objects;
 
