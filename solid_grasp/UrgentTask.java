@@ -1,16 +1,9 @@
-
-// FILE: UrgentTask.java
 package solid_grasp;
 
 import java.time.LocalDate;
 
 /**
- * UrgentTask:
- * A task that may need escalation if it's critical and not done.
- *
- * Implements Escalatable so it can notify stakeholders via a Notifier.
- * Uses Dependency Inversion: depends on Notifier interface, not a concrete
- * email/slack impl.
+ * A task that escalates to stakeholders when critical and not done.
  */
 public class UrgentTask extends Task implements Escalatable {
 
@@ -30,8 +23,7 @@ public class UrgentTask extends Task implements Escalatable {
     }
 
     /**
-     * Escalate this urgent task to stakeholders.
-     * This could page someone, DM Slack, send email, etc.
+     * Escalate this task to stakeholders.
      */
     @Override
     public void escalate() {
@@ -50,15 +42,6 @@ public class UrgentTask extends Task implements Escalatable {
         notifier.notifyStakeholders(sb.toString());
     }
 
-    /**
-     * Called automatically whenever this task is mutated
-     * (status, description, due date).
-     *
-     * Behavior:
-     * - If still not DONE
-     * - And priority is CRITICAL
-     * -> escalate.
-     */
     @Override
     public void onUpdate() {
         if (getPriority() == TaskPriority.CRITICAL

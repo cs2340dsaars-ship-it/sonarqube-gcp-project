@@ -1,18 +1,9 @@
-
-// FILE: Task.java
 package solid_grasp;
 
 import java.time.LocalDate;
 
 /**
- * Base abstract Task.
- * All tasks share core data and lifecycle behavior.
- *
- * This class uses:
- * - SRP: only manages task state and lifecycle.
- * - Open/Closed: new task types extend this class.
- * - Template Method style: update*() methods call onUpdate(), which subclasses
- * can hook.
+ * Base class for all tasks.
  */
 public abstract class Task {
 
@@ -22,9 +13,6 @@ public abstract class Task {
     private TaskStatus status;
     private final TaskPriority priority;
 
-    /**
-     * Protected constructor so only subclasses can instantiate directly.
-     */
     protected Task(String title,
             String description,
             LocalDate dueDate,
@@ -43,30 +31,16 @@ public abstract class Task {
         this.status = TaskStatus.TODO;
     }
 
-    // -------- Core lifecycle mutation methods --------
-
-    /**
-     * Update human-readable notes / details of task.
-     * Triggers subclass hook onUpdate().
-     */
     public void updateDescription(String description) {
         this.description = description;
         onUpdate();
     }
 
-    /**
-     * Update due date.
-     * Triggers subclass hook onUpdate().
-     */
     public void updateDueDate(LocalDate newDueDate) {
         this.dueDate = newDueDate;
         onUpdate();
     }
 
-    /**
-     * Update current status in workflow.
-     * Triggers subclass hook onUpdate().
-     */
     public void updateStatus(TaskStatus newStatus) {
         if (newStatus == null) {
             throw new IllegalArgumentException("TaskStatus cannot be null.");
@@ -74,8 +48,6 @@ public abstract class Task {
         this.status = newStatus;
         onUpdate();
     }
-
-    // -------- Getters (read-only externally) --------
 
     public String getTitle() {
         return title;
@@ -98,8 +70,8 @@ public abstract class Task {
     }
 
     /**
-     * Hook for subclasses to run extra behavior after ANY update.
-     * Example: UrgentTask may escalate, RecurringTask may sync calendars, etc.
+     * Called after any update to the task. Subclasses can override to add custom
+     * behavior.
      */
     public abstract void onUpdate();
 }

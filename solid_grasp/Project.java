@@ -1,4 +1,3 @@
-// FILE: Project.java
 package solid_grasp;
 
 import java.time.LocalDate;
@@ -7,17 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Project:
- * - Has metadata (name, description, start/end dates)
- * - Aggregates Tasks
- * - Aggregates ProjectMembers
- *
- * Responsibilities:
- * - Add/remove tasks
- * - Add/remove members
- * - Query managers
- *
- * This class acts as a GRASP "Controller" for project-scoped operations.
+ * Represents a project with tasks and team members.
  */
 public class Project {
 
@@ -46,8 +35,6 @@ public class Project {
         this.endDate = endDate;
     }
 
-    // -------- Project metadata --------
-
     public String getName() {
         return name;
     }
@@ -67,8 +54,6 @@ public class Project {
     public LocalDate getEndDate() {
         return endDate;
     }
-
-    // -------- Task Management --------
 
     /**
      * Add a task to this project.
@@ -90,13 +75,11 @@ public class Project {
     }
 
     /**
-     * Expose tasks read-only to protect project invariants.
+     * Get all tasks for this project.
      */
     public List<Task> getTasks() {
         return Collections.unmodifiableList(tasks);
     }
-
-    // -------- Member Management --------
 
     /**
      * Add a member to this project with a given role.
@@ -112,8 +95,7 @@ public class Project {
     }
 
     /**
-     * Remove a member from this project entirely.
-     * Comparison is based on TeamMember equality (by email).
+     * Remove a member from this project.
      *
      * @return true if at least one record was removed
      */
@@ -130,14 +112,14 @@ public class Project {
     }
 
     /**
-     * Expose members read-only.
+     * Get all members of this project.
      */
     public List<ProjectMember> getMembers() {
         return Collections.unmodifiableList(members);
     }
 
     /**
-     * Return a list of all project managers in this project.
+     * Get all project managers.
      */
     public List<ProjectMember> getManagers() {
         List<ProjectMember> managers = new ArrayList<>();

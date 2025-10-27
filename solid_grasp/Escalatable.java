@@ -1,10 +1,7 @@
-
-// FILE: Escalatable.java
 package solid_grasp;
 
 /**
- * Interface for tasks that can escalate issues to stakeholders.
- * Not all tasks need this behavior.
+ * Interface for tasks that can escalate to stakeholders.
  */
 public interface Escalatable {
     void escalate();
