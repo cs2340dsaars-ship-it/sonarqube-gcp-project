@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   build:
     name: Build
@@ -14,13 +13,46 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Compile Java files
+        run: |
+          mkdir -p bin
+          javac -d bin -cp ".:junit-4.13.2.jar:hamcrest-core-1.3.jar" solid_grasp/*.java
+
+      - name: Download JUnit and JaCoCo
+        run: |
+          wget https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar
+          wget https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+          wget https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar
+          wget https://repo1.maven.org/maven2/org/jacoco/org.jacoco.cli/0.8.10/org.jacoco.cli-0.8.10-nodeps.jar
+
+      - name: Run tests with JaCoCo coverage
+        run: |
+          java -javaagent:org.jacoco.agent-0.8.10-runtime.jar=destfile=jacoco.exec \
+            -cp "bin:junit-4.13.2.jar:hamcrest-core-1.3.jar" \
+            org.junit.runner.JUnitCore \
+            solid_grasp.TeamMemberTest \
+            solid_grasp.ProjectMemberTest \
+            solid_grasp.EmailNotifierTest \
+            solid_grasp.SlackNotifierTest \
+            solid_grasp.RecurringTaskTest \
+            solid_grasp.UrgentTaskTest \
+            solid_grasp.ProjectTest
+
+      - name: Generate JaCoCo XML report
+        run: |
+          java -jar org.jacoco.cli-0.8.10-nodeps.jar report jacoco.exec \
+            --classfiles bin \
+            --sourcefiles solid_grasp \
+            --xml jacoco.xml
+
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: sonarsource/sonarqube-quality-gate-action@master
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
