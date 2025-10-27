@@ -1,22 +1,16 @@
-
-// FILE: RecurringTask.java
 package solid_grasp;
 
 import java.time.LocalDate;
 
 /**
- * RecurringTask:
- * A task that repeats on a fixed interval (e.g. every 7 days).
- *
- * Implements Recurs to expose recurring-specific behavior
- * without forcing it on all tasks (Interface Segregation Principle).
+ * A task that repeats on a fixed interval.
  */
 public class RecurringTask extends Task implements Recurs {
 
     private final int repeatIntervalDays;
 
     /**
-     * @param repeatIntervalDays e.g. 7 means "weekly"
+     * @param repeatIntervalDays number of days between occurrences
      */
     public RecurringTask(String title,
             String description,
@@ -33,8 +27,7 @@ public class RecurringTask extends Task implements Recurs {
     }
 
     /**
-     * Generate the next occurrence of this task by cloning core fields
-     * but pushing due date forward by repeatIntervalDays.
+     * Generate the next occurrence of this task.
      */
     @Override
     public Task generateNextOccurrence() {
@@ -50,13 +43,8 @@ public class RecurringTask extends Task implements Recurs {
                 this.repeatIntervalDays);
     }
 
-    /**
-     * Hook from Task. For now, recurring tasks don't do anything special on update,
-     * but we keep the override to satisfy abstract contract.
-     */
     @Override
     public void onUpdate() {
-        // No additional behavior required for recurring tasks on update
     }
 
     public int getRepeatIntervalDays() {

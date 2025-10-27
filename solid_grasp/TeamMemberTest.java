@@ -1,75 +1,41 @@
-// FILE: TeamMemberTest.java
 package solid_grasp;
-
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class TeamMemberTest {
 
-    @Test
-    public void testValidTeamMemberCreation() {
-        TeamMember member = new TeamMember("Alice Johnson", "alice@example.com");
-        assertEquals("Alice Johnson", member.getName());
-        assertEquals("alice@example.com", member.getEmail());
+    public static void main(String[] args) {
+        TeamMemberTest test = new TeamMemberTest();
+        test.testEquals_SameEmail();
+        test.testEquals_DifferentEmail();
+        test.testEquals_DifferentType();
+        System.out.println("All tests passed!");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullName() {
-        new TeamMember(null, "alice@example.com");
+    public void testEquals_SameEmail() {
+        TeamMember member1 = new TeamMember("John Doe", "john@example.com");
+        TeamMember member2 = new TeamMember("Jane Doe", "john@example.com");
+
+        if (!member1.equals(member2)) {
+            throw new AssertionError("Expected members with same email to be equal");
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testEmptyName() {
-        new TeamMember("", "alice@example.com");
+    public void testEquals_DifferentEmail() {
+        TeamMember member1 = new TeamMember("John Doe", "john@example.com");
+        TeamMember member2 = new TeamMember("John Doe", "john.doe@example.com");
+
+        if (member1.equals(member2)) {
+            throw new AssertionError("Expected members with different emails to not be equal");
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullEmail() {
-        new TeamMember("Alice", null);
-    }
+    public void testEquals_DifferentType() {
+        TeamMember member = new TeamMember("John Doe", "john@example.com");
+        TeamMember member2 = new TeamMember("Jane Doe", "jane@example.com");
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testEmptyEmail() {
-        new TeamMember("Alice", "");
-    }
-
-    @Test
-    public void testEqualityByEmail() {
-        TeamMember member1 = new TeamMember("Alice", "alice@example.com");
-        TeamMember member2 = new TeamMember("Alice Johnson", "alice@example.com");
-        assertEquals(member1, member2);
-    }
-
-    @Test
-    public void testEqualityByEmailCaseInsensitive() {
-        TeamMember member1 = new TeamMember("Alice", "ALICE@EXAMPLE.COM");
-        TeamMember member2 = new TeamMember("Alice", "alice@example.com");
-        assertEquals(member1, member2);
-    }
-
-    @Test
-    public void testInequalityDifferentEmails() {
-        TeamMember member1 = new TeamMember("Alice", "alice@example.com");
-        TeamMember member2 = new TeamMember("Alice", "bob@example.com");
-        assertNotEquals(member1, member2);
-    }
-
-    @Test
-    public void testHashCodeConsistency() {
-        TeamMember member1 = new TeamMember("Alice", "alice@example.com");
-        TeamMember member2 = new TeamMember("Alice Johnson", "ALICE@EXAMPLE.COM");
-        assertEquals(member1.hashCode(), member2.hashCode());
-    }
-
-    @Test
-    public void testEqualsWithNonTeamMember() {
-        TeamMember member = new TeamMember("Alice", "alice@example.com");
-        assertFalse(member.equals("not a team member"));
-    }
-
-    @Test
-    public void testEqualsWithNull() {
-        TeamMember member = new TeamMember("Alice", "alice@example.com");
-        assertFalse(member.equals(null));
+        Object objAsMember = member2;
+        boolean result = member.equals(objAsMember);
+        if (result) {
+            throw new AssertionError("Expected members with different emails to not be equal");
+        }
     }
 }

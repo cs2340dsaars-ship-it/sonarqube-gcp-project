@@ -1,12 +1,9 @@
-
-// FILE: SlackNotifier.java
 package solid_grasp;
 
 import java.util.logging.Logger;
 
 /**
- * Simple example notifier that "posts to Slack".
- * In a real system this would hit Slack's API.
+ * Slack notification implementation.
  */
 public class SlackNotifier implements Notifier {
 
@@ -14,7 +11,6 @@ public class SlackNotifier implements Notifier {
 
     @Override
     public void notifyStakeholders(String message) {
-        // For now just log to console to keep this standalone/compilable.
         logger.info(() -> String.format("[SLACK NOTIFIER] %s", message));
     }
 }
