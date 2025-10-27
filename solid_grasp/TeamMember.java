@@ -1,14 +1,9 @@
-
-// FILE: TeamMember.java
 package solid_grasp;
 
 import java.util.Objects;
 
 /**
- * Represents a person in the system.
- * This is project-agnostic: just identity + contact.
- *
- * NOTE: Equality is based on email, assuming email is unique.
+ * Represents a team member. Equality is based on email address.
  */
 public class TeamMember {
 
@@ -35,10 +30,6 @@ public class TeamMember {
         return email;
     }
 
-    /**
-     * Equality: two TeamMembers are considered the same logical person
-     * if they have the same email address.
-     */
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof TeamMember))

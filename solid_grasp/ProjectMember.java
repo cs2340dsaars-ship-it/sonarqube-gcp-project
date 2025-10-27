@@ -1,13 +1,7 @@
-
-// FILE: ProjectMember.java
 package solid_grasp;
 
 /**
- * A ProjectMember ties a TeamMember to a specific Project
- * with a specific role in THAT project.
- *
- * We model role at the project level instead of subclassing TeamMember
- * into ProjectManager / Contributor / etc.
+ * Represents a team member and their role within a project.
  */
 public class ProjectMember {
 
