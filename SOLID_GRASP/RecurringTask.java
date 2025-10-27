@@ -1,6 +1,6 @@
 
 // FILE: RecurringTask.java
-package SOLID_GRASP;
+package solid_grasp;
 
 import java.time.LocalDate;
 

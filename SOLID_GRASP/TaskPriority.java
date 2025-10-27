@@ -1,6 +1,6 @@
 
 // FILE: TaskPriority.java
-package SOLID_GRASP;
+package solid_grasp;
 
 public enum TaskPriority {
     LOW,
